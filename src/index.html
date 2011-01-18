@@ -16,23 +16,5 @@ This is a simple online pygmentizer.
 {% for rec in stats %}
 <b>{{ rec.0 }}</b>: {{ rec.1 }}<br />
 {% endfor %}
-<h2>Supported Languages</h2>
-<table>
-  <thead>
-    <tr><th>Lang codes</th><th>Language</th></tr>
-  </thead>
-  <tbody>
-    {% for lang in langs %}
-      <tr>
-        <td>
-          {%for code in lang.0 %} 
-          {{ code }}{% if not forloop.last %}, {%endif %}
-          {% endfor %}
-        </td>
-        <td>{{ lang.1 }}</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
 </body>
 </html>

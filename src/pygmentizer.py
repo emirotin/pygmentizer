@@ -62,9 +62,21 @@ class MainPage(webapp.RequestHandler):
             self.response.set_status(status, res)
         else:
             self.response.out.write(res)
+            
+class LanguagesPage(webapp.RequestHandler):
+    def get(self):
+        path = "langs.html"
+        from pygments.lexers._mapping import LEXERS
+        langs = [(l[2], l[1]) for l in LEXERS.values()]
+        self.response.out.write(template.render(path, 
+                                                {'langs': langs}))
 
 
-application = webapp.WSGIApplication([('/', MainPage)], debug=True)
+application = webapp.WSGIApplication([
+    ('/', MainPage),
+    ('/languages', LanguagesPage),
+  ], 
+  debug=False)
 
 
 def main():

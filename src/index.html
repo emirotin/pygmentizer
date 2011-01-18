@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>index</title>
+	
+</head>
+
+<body>
+This is a simple online pygmentizer.
+<br />
+<h2>Stats:</h2>
+{% for rec in stats %}
+<b>{{ rec.0 }}</b>: {{ rec.1 }}<br />
+{% endfor %}
+<h2>Supported Languages</h2>
+<table>
+  <thead>
+    <tr><th>Lang codes</th><th>Language</th></tr>
+  </thead>
+  <tbody>
+    {% for lang in langs %}
+      <tr>
+        <td>
+          {%for code in lang.0 %} 
+          {{ code }}{% if not forloop.last %}, {%endif %}
+          {% endfor %}
+        </td>
+        <td>{{ lang.1 }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,32 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<title>index</title>
-	
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css" />
+  <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css' />
+  <link href='http://fonts.googleapis.com/css?family=Buda:light' rel='stylesheet' type='text/css' />
+  <link href="/css/main.css" rel="stylesheet" type="text/css" /> 
+  <link href="/css/languages.css" rel="stylesheet" type="text/css" /> 
+	<title>Supported Languages | Pygmentizer web-service</title>
 </head>
 
 <body>
-<h2>Supported Languages</h2>
-<table>
-  <thead>
-    <tr><th>Lang codes</th><th>Language</th></tr>
-  </thead>
-  <tbody>
-    {% for lang in langs %}
+  <h1><a href="/">Pygmentizer for WpPygments</a></h1>
+  <h2>Supported Languages</h2>
+  <table>
+    <colgroup>
+      <col width="40%" />
+      <col width="60%" />
+    </colgroup>
+    <thead>
       <tr>
-        <td>
-          {%for code in lang.0 %} 
-          {{ code }}{% if not forloop.last %}, {%endif %}
-          {% endfor %}
-        </td>
-        <td>{{ lang.1 }}</td>
+        <th class="lang">Language</th>
+        <th class="codes">Lang codes</th>
       </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for lang in langs %}
+        <tr>
+          <td class="lang">{{ lang.0 }}</td>
+          <td class="codes">
+            {%for code in lang.1 %} 
+              {{ code }}{% if not forloop.last %}, {%endif %}
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </body>
 </html>

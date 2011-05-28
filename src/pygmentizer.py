@@ -29,7 +29,7 @@ def _pygmentize(code, lang=""):
             lexer = get_lexer_by_name(lang)
             _count_usage(lexer.name)
         except ClassNotFound:
-            return 'Wrong language {0}. Pygments want you to type language names in lowercase.'.format(lang), 'text/plain', 500
+            return 'Wrong language {0}. Language code is case-sensitive.'.format(lang), 'text/plain', 500
     else:
         lexer = guess_lexer(code)
     try:        
@@ -67,7 +67,8 @@ class LanguagesPage(webapp.RequestHandler):
     
     def get(self):
         path = "langs.html"
-        langs = [(l[2], l[1]) for l in LEXERS.values()]
+        langs = [(l[1], l[2]) for l in LEXERS.values()]
+        langs.sort(key=lambda x: x[0].lower())
         self.response.out.write(template.render(path, 
                                                 {'langs': langs}))
 

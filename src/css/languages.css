@@ -1,0 +1,24 @@
+th {
+  font-weight: bold;
+  padding: 10px 0;
+  border-bottom: 2px solid #EEE;
+}
+
+td {
+  border-bottom: 1px dashed #DDD;
+  padding: 5px 0;
+}
+
+td.lang {
+  font-size: 90%;
+}
+
+td, th {
+  vertical-align: top;
+}
+
+th.codes, td.codes {
+  padding-left: 30px;  
+}
+
+

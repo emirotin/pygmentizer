@@ -1,20 +1,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-	<title>index</title>
-	
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css" />
+	<link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Buda:light' rel='stylesheet' type='text/css' />
+	<link href="/css/main.css" rel="stylesheet" type="text/css" /> 
+	<title>Pygmentizer web-service</title>
 </head>
 
 <body>
-This is a simple online pygmentizer.
-<br />
-<h2>Stats:</h2>
-{% for rec in stats %}
-<b>{{ rec.0 }}</b>: {{ rec.1 }}<br />
-{% endfor %}
+  <h1>Pygmentizer for WpPygments</h1>
+  <p>This is a simple online pygmentizer &mdash; a supporting project for WpPygments Wordpress plugin.</p>
+  <p>Based on an excellent <a href="http://pygments.org/">Pygments</a> library,
+    it performs a single task &mdash; accepts a code snippet, passes it through Pygments and returns the result.</p>
+  <p>Created by <a href="http://blog.mirotin.net">Eugene Mirotin</a>.</p>
+
+  <h2>Usage</h2>
+  <p>To use this service, issue the HTTP POST request to <code>http://pygmentizer.appspot.com/</code>.</p>
+  <p>The request body can contain 2 parameters:
+    <ul>
+      <li><code>code</code> <strong>(mandatory)</strong> &mdash;
+        the code snippet, normally the text you put inside <code>&lt;code&gt;&lt;pre&gt;...&lt;/pre&gt;&lt;/code&gt;</code>,
+      </li>
+      <li><code>lang</code> <em>(otpional, though highly recommended)</em> &mdash;
+        the language code. If ommitted, the langage will be guessed by Pygments, though guess is normally bad.<br />
+        See the <a href="/languages">list of supported languages</a>. <strong>Important</strong>: language code is case-sensitive.
+      </li>
+    </ul>
+  </p>
+  <p>The response would be:
+    <ul>
+      <li><code>text/html</code> response with status 200 in a normal case,</li>
+      <li><code>text/plain</code> error with status 500 if the <code>lang</code> code is invalid,</li>
+      <li><code>text/plain</code> error with status 500 if Pygments encountered internal error.</li>
+    </ul>
+  </p>
+
+  <h2>Language Stats</h2>
+  {% for rec in stats %}
+    <strong>{{ rec.0 }}</strong>: {{ rec.1 }}<br />
+  {% endfor %}
 </body>
 </html>

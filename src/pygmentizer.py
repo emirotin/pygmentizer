@@ -72,9 +72,14 @@ class LanguagesPage(webapp.RequestHandler):
         self.response.out.write(template.render(path, 
                                                 {'langs': langs}))
 
+class TestPage(webapp.RequestHandler):
+    def get(self):
+        path = "test.html"
+        self.response.out.write(template.render(path, {}))
 
 application = webapp.WSGIApplication([
     ('/', MainPage),
+    ('/test', TestPage),
     ('/languages', LanguagesPage),
   ], 
   debug=False)

@@ -32,15 +32,18 @@
   </p>
   <p>The response would be:
     <ul>
-      <li><code>text/html</code> response with status 200 in a normal case,</li>
+      <li><code>text/html</code> response (the pygmentized code) with status 200 in a normal case,</li>
       <li><code>text/plain</code> error with status 500 if the <code>lang</code> code is invalid,</li>
       <li><code>text/plain</code> error with status 500 if Pygments encountered internal error.</li>
     </ul>
   </p>
+  <p>You can try it yourself <a href="/test">here</a>.</p>
 
-  <h2>Language Stats</h2>
-  {% for rec in stats %}
-    <strong>{{ rec.0 }}</strong>: {{ rec.1 }}<br />
-  {% endfor %}
+  {% if stats %}
+    <h2>Language Stats</h2>
+    {% for rec in stats %}
+      <strong>{{ rec.0 }}</strong>: {{ rec.1 }}<br />
+    {% endfor %}
+  {% endif %}
 </body>
 </html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Test | Pygmentizer web-service</title>
+
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css" />
+  <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css' />
+  <link href='http://fonts.googleapis.com/css?family=Buda:light' rel='stylesheet' type='text/css' />
+  <link href="/css/main.css" rel="stylesheet" type="text/css" /> 
+  <link href="/css/test.css" rel="stylesheet" type="text/css" /> 
+  <link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.13/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+  <!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.js" type="text/javascript"></script>-->
+  <link id="pygments-style" href="/css/pygments/default.css" rel="stylesheet" type="text/css" /> 
+  
+  <script type="text/javascript">
+    $(function(){
+      var STYLES = ['monokai', 'manni', 'perldoc', 'borland', 'colorful', 
+                    'default', 'murphy', 'vs', 'trac', 'tango', 'fruity',
+                    'autumn', 'bw', 'emacs', 'vim', 'pastie', 'friendly', 
+                    'native'],
+          i = 0, l = STYLES.length, txt,
+          style_select = $('#style');
+      
+      for (i = 0; i < l; ++i) {
+        txt = STYLES[i];
+        style_select.append('<option value="' + txt + '"' + 
+          (txt === 'default'? 'selected="selected"' : '') + '>' 
+          + txt + '</option'
+        );
+      }
+      
+      $("select#style").change(function () {
+        var val = $("select#style option:selected").text();
+        $('link#pygments-style').attr('href', '/css/pygments/' + val + '.css');
+      });
+
+      
+      function show_error(error) {
+        $('#error').show().children('#error-text').text(error);
+      }
+      
+      function show_results(res) {
+        $('#result').show().html(res);
+        $('#result').find('.linenodiv pre').addClass('nl');
+      }
+      
+      $('#submit').click(function(){
+        var code = $('#code').val(),
+            lang = $('#lang').val();
+        if (!code) {
+          show_error('Code is empty');
+          return;
+        }
+        $('#error').hide();
+        $('#result').hide();
+        $.ajax('/', {
+          type: 'post',
+          data: {'code': code, 'lang': lang},
+          dataType: 'html',
+          success: function(data) {
+            show_results(data);
+          },
+          error: function(jqXHR, textStatus) {
+            console.dir(jqXHR);
+            show_error(jqXHR.responseText);
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1><a href="/">Pygmentizer for WpPygments</a></h1>
+  <h2>Test Page</h2>
+  <label for="code">Code:</label><br />
+  <textarea id="code" name="code"></textarea>
+  <br />
+  <div id="result" class="highlighted"></div>
+  <div id="error" class="ui-state-error ui-corner-all"> 
+    <strong>Error:</strong> <span id="error-text"></span>.
+  </div>
+  <label for="lang">Language:</label> <input type="text" id="lang" name="lang" />
+  <input type="submit" id="submit" value="Submit" />
+  <label for="style">Switch style:</label> <select id="style" name="style"></select>
+</body>
+</html>

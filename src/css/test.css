@@ -1,0 +1,64 @@
+#code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  width: 800px;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+#code.collapsed {
+  height: 100px;
+}
+
+#lang {
+  font-size: 80%;
+  width: 200px;
+  height: 35px;
+}
+
+#submit {
+  font-size: 80%;
+  height: 39px;
+  width: 120px;
+}
+
+#error {
+  padding: 0 0.7em;
+  font-size: 80%;
+  display: none;
+  margin-bottom: 20px;
+}
+
+#result {
+  width: 800px;
+  display: none;
+}
+
+#style {
+  width: 155px;
+  font-size: 80%;
+}
+
+.highlight-wrapper {
+  padding-bottom: 24px;
+}  
+
+.highlighted {
+  overflow-x: auto;
+}
+
+.highlighttable {
+  border: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.highlighttable td {
+  padding: 3px !important;
+}
+
+.highlighttable pre {
+  margin-bottom: 5px !important;
+  padding: 1em !important;
+  background-color: transparent;
+  line-height: 125%;
+}

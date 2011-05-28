@@ -4,6 +4,7 @@ from google.appengine.ext.webapp import template
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name, guess_lexer
+from pygments.lexers._mapping import LEXERS
 from pygments.formatters import HtmlFormatter
 from pygments.util import ClassNotFound
 
@@ -47,10 +48,8 @@ class MainPage(webapp.RequestHandler):
         stats = []
         for r in rs:
             stats.append((r.lang, r.count))
-        from pygments.lexers._mapping import LEXERS
-        langs = [(l[2], l[1]) for l in LEXERS.values()]
         self.response.out.write(template.render(path, 
-                                                {'stats': stats, 'langs': langs}))
+                                                {'stats': stats,}))
         
     def post(self):
         lang = self.request.get('lang')
@@ -62,11 +61,12 @@ class MainPage(webapp.RequestHandler):
             self.response.set_status(status, res)
         else:
             self.response.out.write(res)
+
             
 class LanguagesPage(webapp.RequestHandler):
+    
     def get(self):
         path = "langs.html"
-        from pygments.lexers._mapping import LEXERS
         langs = [(l[2], l[1]) for l in LEXERS.values()]
         self.response.out.write(template.render(path, 
                                                 {'langs': langs}))

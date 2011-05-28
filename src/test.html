@@ -51,7 +51,7 @@
         var code = $('#code').val(),
             lang = $('#lang').val();
         if (!code) {
-          show_error('Code is empty');
+          show_error('Code field is empty.');
           return;
         }
         $('#error').hide();
@@ -81,7 +81,7 @@
   <br />
   <div id="result" class="highlighted"></div>
   <div id="error" class="ui-state-error ui-corner-all"> 
-    <strong>Error:</strong> <span id="error-text"></span>.
+    <strong>Error:</strong> <span id="error-text"></span>
   </div>
   <label for="lang">Language:</label> <input type="text" id="lang" name="lang" />
   <input type="submit" id="submit" value="Submit" />

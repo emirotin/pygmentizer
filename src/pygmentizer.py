@@ -29,13 +29,13 @@ def _pygmentize(code, lang=""):
             lexer = get_lexer_by_name(lang)
             _count_usage(lexer.name)
         except ClassNotFound:
-            return 'Wrong language {0}. Language code is case-sensitive.'.format(lang), 'text/plain', 500
+            return 'Wrong language "%s". Note: language code is case-sensitive.' % lang, 'text/plain', 500
     else:
         lexer = guess_lexer(code)
     try:        
         res = highlight(code, lexer, _formatter)
     except Exception, e:
-        return 'Error pygmentizing the code. {0}'.format(e), 'text/plain', 500
+        return 'Error pygmentizing the code. %s' % e, 'text/plain', 500
     return res, 'text/html', 200
 
 
@@ -58,9 +58,9 @@ class MainPage(webapp.RequestHandler):
         res, type, status = _pygmentize(code, lang)
         self.response.headers['Content-Type'] = type
         if status != 200:
-            self.response.set_status(status, res)
-        else:
-            self.response.out.write(res)
+            self.response.set_status(status)
+        
+        self.response.out.write(res)
 
             
 class LanguagesPage(webapp.RequestHandler):

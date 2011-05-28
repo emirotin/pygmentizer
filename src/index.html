@@ -12,23 +12,23 @@
 
 <body>
   <h1>Pygmentizer for WpPygments</h1>
-  <p>This is a simple online pygmentizer &mdash; a supporting project for WpPygments Wordpress plugin.</p>
-  <p>Based on an excellent <a href="http://pygments.org/">Pygments</a> library,
-    it performs a single task &mdash; accepts a code snippet, passes it through Pygments and returns the result.</p>
-  <p>Created by <a href="http://blog.mirotin.net">Eugene Mirotin</a>.</p>
+  <p>This is a simple online pygmentizer &mdash; a supporting project for WpPygments Wordpress plugin.
+    Based on an excellent <a href="http://pygments.org/">Pygments</a> library,
+    it performs a single task &mdash; accepts a code snippet, passes it through Pygments and returns the result.
+    Created by <a href="http://blog.mirotin.net">Eugene Mirotin</a>.</p>
 
   <h2>Usage</h2>
-  <p>To use this service, issue HTTP POST request to <code>http://pygmentizer.appspot.com/</code>.</p>
+  <p>To use this service, issue POST request to <code>http://pygmentizer.appspot.com/</code>.</p>
   <p>The request body can contain 2 parameters:
     <ul>
       <li><code>code</code> <strong>(mandatory)</strong> &mdash;
         the code snippet, normally the text you put inside <code>&lt;code&gt;&lt;pre&gt;...&lt;/pre&gt;&lt;/code&gt;</code>,
       </li>
       <li><code>lang</code> <em>(otpional, though highly recommended)</em> &mdash;
-        the language code. If ommitted, the langage will be guessed by Pygments, though guess is normally bad.<br />
-        See the <a href="/languages">list of supported languages</a>. <strong>Important</strong>: language code is case-sensitive.
+        the language code. If ommitted, the langage will be guessed by Pygments, though guess is normally bad.
       </li>
     </ul>
+    <p>See the <a href="/languages">list of supported languages</a>. <strong>Important</strong>: language code is case-sensitive.</p>
   </p>
   <p>The response would be:
     <ul>

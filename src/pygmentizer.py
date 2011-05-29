@@ -39,7 +39,6 @@ def _pygmentize(code, lang=""):
     return res, 'text/html', 200
 
 
-
 class MainPage(webapp.RequestHandler):
 
     def get(self):
@@ -48,6 +47,7 @@ class MainPage(webapp.RequestHandler):
         stats = []
         for r in rs:
             stats.append((r.lang, r.count))
+        stats.sort(key=lambda x: x[1], reverse=True)
         self.response.out.write(template.render(path, 
                                                 {'stats': stats,}))
         
@@ -73,6 +73,7 @@ class LanguagesPage(webapp.RequestHandler):
                                                 {'langs': langs}))
 
 class TestPage(webapp.RequestHandler):
+   
     def get(self):
         path = "test.html"
         self.response.out.write(template.render(path, {}))
